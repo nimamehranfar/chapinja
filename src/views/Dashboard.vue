@@ -130,6 +130,7 @@
                 <b-form-radio  class="button-Nima" name="some-radios" value="B">مشتری</b-form-radio>
             </b-form-radio-group>
         </b-form-group>
+        <h1>Hi {{user.firstName}}!</h1>
 
 
         <div v-if="User=='B'">
@@ -224,9 +225,9 @@
                 <div class="blackboard"></div>
                 <div class="description">
                     <div class="sidebar" >
-                        <a href="#">{{users.id}}</a>
-                        <a href="#">{{users.name}}</a>
-                        <a href="#">{{users.email}}</a>
+                        <a href="#">{{profile.id}}</a>
+                        <a href="#">{{profile.name}}</a>
+                        <a href="#">{{profile.email}}</a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="Dashboard">
@@ -235,16 +236,10 @@
                                                 buttons
                                                 button-variant="outline-primary"
                                                 required>
-                                <b-form-radio  class="button-Nima" name="some-radios" value="A">دریافت سفارش</b-form-radio>
                                 <b-form-radio  class="button-Nima" name="some-radios" value="B">لیست سفارشات</b-form-radio>
                             </b-form-radio-group>
                         </b-form-group>
-                        <div v-if="selected=='A'">
-                            <label>دریافت آخرین سفارش: </label>
-                            <b-button @click="ondownload" variant="primary">download</b-button>
-
-                        </div>
-                        <div v-else>
+                        <div>
                             <b-list-group >
                                 <b-list-group-item
                                         href="#"
@@ -255,6 +250,7 @@
                                     <div class="d-flex w-100 justify-content-between">
                                         <h6 class="mb-1">{{ result.title }}</h6>
                                         <small>{{ result.id }}</small>
+                                        "button"
                                     </div>
 
                                     <p class="mb-1">{{ result.body }}</p>
@@ -285,11 +281,12 @@
         },
         data() {
             return {
+                logged_in:'false',
                 selected: '',
                 User:'B',
                 seller_id:'',
                 file: null,
-                users:{
+                profile:{
                     id:'1',
                     name : '2',
                     email: '3'
@@ -303,7 +300,13 @@
                 error: ""
             }
         },
-        created: function() {
+        created () {
+            const loggedIn = localStorage.getItem('user');
+
+            if (loggedIn) {
+                this.logged_in=true;
+            }
+            this.$store.dispatch('users/getAll');
             this.loading = true;
             axios
                 .get("https://jsonplaceholder.typicode.com/posts")
@@ -324,6 +327,14 @@
             onDownload(evt2){
                 evt2.preventDefault()
                 alert(JSON.stringify(this.seller_id))
+            }
+        },
+        computed: {
+            user () {
+                return this.$store.state.authentication.user;
+            },
+            users () {
+                return this.$store.state.users.all;
             }
         }
     }

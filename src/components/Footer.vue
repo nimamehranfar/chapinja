@@ -154,7 +154,7 @@
                         <router-link to="/SignUp">ثبت نام</router-link>
                     </li>
                     <li>
-                        <router-link to="/AboutUs">درباره ما</router-link>
+                        <router-link to="/Dashboard">داشبورد</router-link>
                     </li>
                 </ul>
             </div>
@@ -177,7 +177,7 @@
                             </a>
                         </span>
                     <span class="socialLogo col2">
-                            <a href="https://t.me/porsesh37">
+                            <a href="https://t.me/Nima_Mehranfar">
                                 <img :src="require('../components/img/telegramLogo.png')" alt="telegram logo">
                             </a>
                         </span>

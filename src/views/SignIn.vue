@@ -121,7 +121,7 @@
                         <b-form-input
                                 class="inputs"
                                 id="input-1"
-                                v-model="form.email"
+                                v-model="email"
                                 type="email"
                                 required
                                 placeholder="لطفا ایمیل خود را وارد کنید"
@@ -132,7 +132,7 @@
                         <b-form-input
                                 class="inputs"
                                 id="input-3"
-                                v-model="form.password"
+                                v-model="password"
                                 required
                                 placeholder="لطفا پسوورد شخصی خود را وارد کنید"
                                 type="password"
@@ -162,19 +162,32 @@
         },
         data() {
             return {
-                form: {
-                    email: '',
-                    password:''
-                },
+                email: '',
+                password: '',
                 show: true,
 
             }
         },
+        computed: {
+            loggingIn() {
+                return this.$store.state.authentication.status.loggingIn;
+            }
+        },
+        created() {
+            // reset login status
+            this.$store.dispatch('authentication/logout');
+        },
         methods: {
+
             onSubmit(evt) {
-                evt.preventDefault()
-                alert(JSON.stringify(this.form))
+                evt.preventDefault();
+                this.submitted = true;
+                const {email, password} = this;
+                const {dispatch} = this.$store;
+                if (email && password) {
+                    dispatch('authentication/login', {email, password});
+                }
             }
         }
-    }
+    };
 </script>

@@ -147,7 +147,7 @@
                         ></b-form-input>
                     </b-form-group>
 
-                    <b-form-group id="input-group-4" label="پسوورد شما:" label-for="input-4">
+                    <b-form-group id="input-group-3" label="پسوورد شما:" label-for="input-3">
                         <b-form-input
                                 class="inputs"
                                 id="input-3"
@@ -158,14 +158,15 @@
                         ></b-form-input>
                     </b-form-group>
 
-                    <b-form-group id="input-group-3" label="جنسیت:" label-for="input-3">
-                        <b-form-select
+                    <b-form-group id="input-group-4" label="تکرار پسوورد شما:" label-for="input-4">
+                        <b-form-input
                                 class="inputs"
-                                id="input-4"
-                                v-model="form.gender"
-                                :options="genders"
+                                id="input-3"
+                                v-model="form.passwordconfirm"
                                 required
-                        ></b-form-select>
+                                placeholder="لطفا پسوورد شخصی خود را دوباره وارد کنید"
+                                type="password"
+                        ></b-form-input>
                     </b-form-group>
 
                     <b-form-group>
@@ -175,23 +176,11 @@
                                             button-variant="outline-primary"
                                             size="lg"
                                             required>
-                            <b-form-radio  class="button-Nima" name="some-radios" value="A">مغازه دار</b-form-radio>
-                            <b-form-radio  class="button-Nima" name="some-radios" value="B">مشتری</b-form-radio>
+                            <b-form-radio  class="button-Nima" name="some-radios" value="true">مغازه دار</b-form-radio>
+                            <b-form-radio  class="button-Nima" name="some-radios" value="false">مشتری</b-form-radio>
                         </b-form-radio-group>
                     </b-form-group>
-
-                    <div v-if="selected=='A'">
-                        <b-form-group id="input-group-5" label="آدرس" label-for="input-5">
-                            <b-form-input
-                                    class="inputs"
-                                    id="input-5"
-                                    v-model="form.address"
-                                    required
-                                    placeholder="لطفا آدرس کامل خود را وارد کنید"
-                            ></b-form-input>
-                        </b-form-group>
-                    </div>
-                    <div v-else>
+                    <div>
                         <b-form-group id="input-group-6" label="محله" label-for="input-6">
                             <b-form-input
                                     class="inputs"
@@ -229,18 +218,17 @@
                 form: {
                     email: '',
                     name: '',
-                    password:''
+                    password:'',
+                    passwordconfirm:'',
+                    selected: '',
+                    region:''
                 },
-                genders: ['مرد', 'زن', 'دیگر'],
                 show: true,
-                selected: '',
-                address: '',
-                region:''
             }
         },
         methods: {
             onSubmit(evt) {
-                evt.preventDefault()
+                evt.preventDefault();
                 alert(JSON.stringify(this.form))
             }
         }

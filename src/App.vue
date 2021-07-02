@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
     <router-view/>
   </div>
 </template>
@@ -26,3 +27,14 @@
   color: #42b983;
 }
 </style>
+
+<script>
+  export default {
+    name: 'app',
+    computed: {
+      alert () {
+        return this.$store.state.alert
+      }
+    }
+  };
+</script>

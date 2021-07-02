@@ -315,9 +315,6 @@
                     <p class="descriptionSolution-title boldText">راه حل پیش ماست.</p>
                     <img :src="require('../components/img/solution.png')" alt="">
                 </div>
-                <div class="descriptionButton">
-                    <router-link to="/WhyChapinja">بیشتر بخوانید</router-link>
-                </div>
 
             </div>
             <Footer></Footer>

@@ -4,16 +4,26 @@
             <b-nav-item to="/" exact exact-active-class="active">صفحه اصلی</b-nav-item>
             <b-nav-item to="/SignIn" exact exact-active-class="active">ورود</b-nav-item>
             <b-nav-item to="/SignUp" exact exact-active-class="active">ثبت نام</b-nav-item>
-            <b-nav-item to="/WhyChapinja" exact exact-active-class="active">چرا چاپ اینجا؟</b-nav-item>
-            <b-nav-item to="/Dashboard" exact exact-active-class="active" >داشبورد</b-nav-item>
-            <b-nav-item to="/AboutUs" exact exact-active-class="active">تیم ما</b-nav-item>
-        </b-nav>
+            <b-nav-item v-if="logged_in==true" to="/Dashboard" exact exact-active-class="active" >داشبورد</b-nav-item>
+       </b-nav>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        data() {
+            return {
+                logged_in:'false',
+            }
+        },
+        created () {
+            const loggedIn = localStorage.getItem('user');
+
+            if (loggedIn) {
+                this.logged_in=true;
+            }
+        }
     }
 </script>
 
